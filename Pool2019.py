@@ -28,7 +28,8 @@ pumpe_an = False
 now = time.localtime()
 print ("Starttag", now.tm_mday,".",now.tm_mon)
 print ("Startzeit", now.tm_hour , now.tm_min , now.tm_sec)
-
+print("HIGH")
+GPIO.output(14,GPIO.HIGH)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -36,44 +37,44 @@ while True:
     #zwischen 10 und 17 Uhr
     if now.tm_hour > 10 and now.tm_hour <= 16:
         #print("if now.tm_hour > 10 or now.tm_hour <= 16:")
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        #Beim Umstellen auf Arbeit wird feierabend auf False gesetzt    
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        #Beim Umstellen auf Arbeit wird feierabend auf False gesetzt
         if feierabend == True:
             ("Pumpe arbeitet seit ",now.tm_hour , now.tm_min , now.tm_sec)
             feierabend = False
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         #bei 0,10,20,30,40,50 Min und weniger als 21 sec wird die Pumpe angeschaltet
         if now.tm_min % 10 == 0 and now.tm_sec < 21 and pumpe_an == False:
             print ("Pumpe an um ", now.tm_hour , now.tm_min , now.tm_sec)
             pumpe_an = True
             GPIO.output(14,GPIO.LOW)
             time.sleep(20)
-            
-        #andernfalls ist die Pumpe aus    
+
+        #andernfalls ist die Pumpe aus
         else :
             if pumpe_an == True:
                 print ("Pumpe aus um ", now.tm_hour , now.tm_min , now.tm_sec)
                 pumpe_an = False
                 GPIO.output(14,GPIO.HIGH)
-                
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     else:
         if feierabend == False:
             feierabend = True
             print ("Pumpe Feierabend um ", now.tm_hour , now.tm_min , now.tm_sec)
-        GPIO.output(14,GPIO.LOW)
+        GPIO.output(14,GPIO.HIGH)
         pause = True
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         #solange in der Schleife bis aktuelle Uhrzeit mindestens 10:00 Uhr
         while pause:
             now = time.localtime()
             if now.tm_hour > 9 and now.tm_hour < 17:
                 pause = False
             time.sleep(1)
-            
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+    #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     now = time.localtime()
     #print(now.tm_sec)
     time.sleep(1)
