@@ -1,0 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/.gitignore
+.idea/deployment.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/scripts.iml
+.idea/sonarlint/
+.idea/sshConfigs.xml
+.idea/vcs.xml
+.idea/webServers.xml

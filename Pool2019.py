@@ -2,6 +2,15 @@
 VIOLET  5V
 GRÜN    Ground
 Blau    GPIO 14
+
+Modul SRD-05VDC-SL-C
+Anschluss
+
+     __     X   Pool
+    |
+K1   /      X   Außenleiter
+    |
+    |__     X   Leer
 """
 
 import RPi.GPIO as GPIO
