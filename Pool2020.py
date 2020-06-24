@@ -80,10 +80,10 @@ while True:
         write_to_log("Feierabend: ")
 
         #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        #solange in der Schleife bis aktuelle Uhrzeit mindestens 10:00 Uhr
+        #solange in der Schleife bis aktuelle Uhrzeit mindestens 9:00 Uhr
         while pause:
             now = time.localtime()
-            if int(datetime.now().strftime("%H")) > 9 and int(datetime.now().strftime("%H")) < 17:
+            if int(datetime.now().strftime("%H")) > 8 and int(datetime.now().strftime("%H")) < 17:
                 pause = False
             time.sleep(1)
 
